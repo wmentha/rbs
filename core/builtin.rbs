@@ -94,14 +94,27 @@ interface _Exception
                | (String arg0) -> Exception
 end
 
-type int = Integer | _ToInt
-type real = Integer | Float | Rational
-
+# Duck types
+type int = Integer | _ToInt | _ToI
+type integer = int
+type float = Float | _ToF
+type rational = Rational | _ToR
+type real = int | float | rational
+type array = Array | _ToA[A] | _ToArr[A]
+type hash = Hash | _ToH[K, V] | _ToHash[K, V]
+type complex = Complex | _ToC
 type string = String | _ToStr
+type symbol = Symbol | _ToSym
+type proc = Proc | _ToProc
 type encoding = Encoding | string
 type path = string | _ToPath
-
 type io = IO | _ToIO
+
+interface _Comparable
+  def <=>: (untyped other) -> Integer?
+end
+
+type comparable = Comparable | _Comparable
 
 # `boolish` is a type for documentation.
 # It means the value of this type is only for testing a condition.
